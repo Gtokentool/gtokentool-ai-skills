@@ -6,6 +6,15 @@ The input amount is the exact wallet payment. Never append a platform fee.
 All signing and broadcasting goes through Binance Agentic Wallet's
 `contract-call preview` and `contract-call execute` commands.
 
+Resolve `FairMint` from the user-confirmed token address:
+
+```text
+launchId = launchIdByToken(token)
+launch = getLaunch(launchId)
+require launch.token == token
+fairMint = launch.sale
+```
+
 For a native payment:
 
 ```text
