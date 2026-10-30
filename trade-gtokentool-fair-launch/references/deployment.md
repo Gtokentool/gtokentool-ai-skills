@@ -25,6 +25,7 @@ Sample project:
 
 - Token `GTAI`: `0xC2058a38773ee8075f46657b6a056b05C7A79a52`
 - FairMint: `0x3f5a5E13C0336c71b4565Cf96b72002DD9c372fD`
+- Pancake pair: `0xF4f194eA9Cb6542EeA06561Da1007B0995e36caa`
 
 ## BSC testnet (contract development only)
 
