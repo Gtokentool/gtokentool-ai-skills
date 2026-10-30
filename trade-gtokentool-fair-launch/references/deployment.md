@@ -1,6 +1,16 @@
 # Supported deployments
 
-## BSC testnet
+## Agentic Wallet network
+
+Binance Agentic Wallet execution is currently available on BSC mainnet,
+Binance chain ID `56`. The official `baw contract-call` command does not expose
+BSC testnet as an execution network.
+
+If the project is deployed on BSC testnet, it can be tested with a dedicated
+test key from the development environment, but it must not be described as
+buyable through Binance Agentic Wallet.
+
+## BSC testnet (contract development only)
 
 - chainId: `97`
 - RPC: `https://data-seed-prebsc-1-s1.bnbchain.org:8545`
@@ -18,7 +28,8 @@ Sample project:
 - Official pair: `0x27a763FF633CF93e3C825aa5de5F7F42B77A8fC7`
 
 Testnet uses `TestAgentIdNFT` because Binance Agent ID is a production
-credential. Do not describe it as a production Binance identity check.
+credential. Do not describe it as a production Binance identity check and do not
+route it through `baw`.
 
 No BSC mainnet FairLaunchFactory is registered yet. Stop if an order requests
 mainnet and no audited mainnet deployment is configured.
