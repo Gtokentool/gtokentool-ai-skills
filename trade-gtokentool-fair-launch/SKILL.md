@@ -1,6 +1,6 @@
 ---
 name: trade-gtokentool-fair-launch
-description: Buy or sell a GTokenTool Fair Launch token with Binance Agentic Wallet on BSC. Use when an order names a GTokenTool FairMint project or asks to quote, buy, check quota, or sell a fair-launch token. This skill wraps the official binance-agentic-wallet skill and never handles private keys.
+description: Buy or sell a GTokenTool Fair Launch token with Binance Agentic Wallet on BSC. Use when an order names a GTokenTool project URL or launched-token address and asks to quote, buy, check quota, or sell. This skill resolves the internal FairMint contract through the official factory and never handles private keys.
 metadata:
   author: GTokenTool
   version: '2.0.0'
@@ -33,14 +33,23 @@ Read [references/trading.md](references/trading.md) for the buy and sell flows a
 
 Stop and ask if any of these are missing:
 
-- A GTokenTool fair-launch project URL or the full FairMint address.
+- A GTokenTool fair-launch project URL or the full launched-token address.
 - Buy or sell.
 - Amount with a unit.
-- For a sell: the full token contract address.
 
 If the user supplies a project URL, extract the address from its
 `/fairlaunch/<address>` path. Verify that the configured FairLaunchFactory
 recognizes that address. Never infer a token from a ticker or marketing text.
+
+If the user supplies a token address, call
+`launchIdByToken(token)`, then `getLaunch(launchId)`, and verify all of these:
+
+- The launch ID is not zero.
+- `launch.token == token`.
+- The returned `launch.sale` is a contract with code.
+
+Use the token address as the user-facing identity. FairMint is an internal
+execution contract and should not be shown in the order prompt.
 
 ## Mandatory preflight
 
@@ -55,8 +64,8 @@ for generic wallet syntax.
    or `devMode.expiresAt` has passed, stop and tell the user to enable Developer
    Mode in Binance App → Agentic Wallet → Settings. Re-run the settings command
    after they confirm it is on.
-6. Read the FairMint registry, token, payment token, open state, current price,
-   quota, and project treasury from BSC mainnet.
+6. Resolve the registered FairMint from the token address, then read its token,
+   payment token, open state, current price, quota, and project treasury.
 
 Never ask for an Agent ID token number. `baw wallet agent-id` is the supported
 eligibility check. Never request a private key, seed phrase, or session token.
