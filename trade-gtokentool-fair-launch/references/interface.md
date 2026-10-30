@@ -1,6 +1,9 @@
 # Contract interface
 
-Use raw JSON-RPC, `cast`, or viem. All reads below are `eth_call`.
+Use read-only JSON-RPC, `cast call`, or viem for the reads and calldata below.
+Never use those tools to sign or broadcast an Agentic Wallet order. Signing and
+broadcasting goes through `baw contract-call preview` and
+`baw contract-call execute`.
 
 ## FairMint
 
@@ -11,30 +14,48 @@ officialPair() -> address
 opened() -> bool
 mintedShares() -> uint256
 totalShares() -> uint256
-remainingQuota(uint256 agentId) -> uint256
-agentIdByWallet(address wallet) -> uint256
-inviteBonusByAgentId(uint256 agentId) -> uint256
-referrerOfAgentId(uint256 agentId) -> uint256
-quoteBuy(address wallet,uint256 paymentAmount,uint256 agentId)
+remainingQuota(address wallet) -> uint256
+mintedByWallet(address wallet) -> uint256
+inviteBonusByWallet(address wallet) -> uint256
+referrerOfWallet(address wallet) -> address
+quoteBuy(address wallet,uint256 paymentAmount)
   -> (sharesOut,tokensOut,pricePerShare,platformFee,liquidityAmount,treasuryAmount)
-buyWithNative(uint256 minTokensOut,uint256 agentId,uint256 referrerAgentId) payable
-buyWithToken(uint256 amount,uint256 minTokensOut,uint256 agentId,uint256 referrerAgentId)
+buyWithNative(uint256 minTokensOut,address referrer) payable
+buyWithToken(uint256 amount,uint256 minTokensOut,address referrer)
 ```
 
 `paymentToken == address(0)` means native BNB. Otherwise the order must use
 `buyWithToken` and approve the exact FairMint address first.
 
-## Agent ID
+## Execution
+
+```bash
+baw contract-call preview \
+  --binanceChainId 56 \
+  --from <agentWalletAddress> \
+  --to <fairMint> \
+  --value <amountInWei> \
+  --inputData <calldata> \
+  --json
+
+baw contract-call execute --requestId <requestId> --json
+```
+
+Developer Mode must be enabled in the Binance App before preview. The user sees
+the parsed transaction, simulation, risks, and authority changes, then gives a
+fresh confirmation before execute.
+
+## Binance AI wallet eligibility
 
 For buys:
 
 ```text
-ownerOf(uint256 agentId) -> address
+balanceOf(address wallet) -> uint256
 ```
 
-The returned owner must equal the buyer wallet. One wallet is permanently
-bound to the first Agent ID it uses, and one Agent ID is bound to the first
-wallet that uses it.
+The buyer wallet must hold at least one token from the configured Binance Agent
+ID collection. Quota and referral rewards are tracked by wallet address. Never
+ask the user for an Agent ID token number.
 
 ## Pancake V2 sale
 
