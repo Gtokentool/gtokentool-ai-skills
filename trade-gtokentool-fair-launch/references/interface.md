@@ -7,6 +7,16 @@ broadcasting goes through `baw contract-call preview` and
 
 ## FairMint
 
+Resolve the internal sale contract from the official factory before reading:
+
+```text
+launchIdByToken(address token) -> uint256
+getLaunch(uint256 launchId)
+  -> (token,sale,creator,treasury,paymentToken,metadataHash,createdAt,version)
+```
+
+Use `launch.sale` only after `launch.token == requestedToken`.
+
 ```text
 token() -> address
 paymentToken() -> address
