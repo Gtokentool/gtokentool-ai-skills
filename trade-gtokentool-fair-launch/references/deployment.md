@@ -14,18 +14,17 @@ buyable through Binance Agentic Wallet.
 
 - chainId: `56`
 - FairLaunchFactory proxy: `0x4750e798F8FC9bD473338934e8FE499350FA1c58`
-- Factory implementation: `0x230C10F0fB3152C7A0E7273a83E54A41ed2Fd780`
-- LaunchToken implementation: `0x3509f53a769a2797e2268e3309DA8A781890F8DE`
-- FairMint implementation: `0x73c5521F8077ef5Ee2F90f760E93e41c532239C1`
+- Factory implementation: `0x672af015d29C0D63CEc2caA935cD4360d9C779D1`
+- LaunchToken implementation: `0x4b44D885075a5D083F95a89426A4B91c1CC1d5ea`
+- FairMint implementation: `0x5BADBd18c3fb749804Eb1C66d3cfFcF92c810e4C`
 - Agent ID collection: `0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F`
 - Pancake V2 router: `0x10ED43C718714eb63d5aA57B78B54704E256024E`
 - WBNB: `0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c`
 
 Sample project:
 
-- Token `GTAI`: `0xC2058a38773ee8075f46657b6a056b05C7A79a52`
-- FairMint: `0x3f5a5E13C0336c71b4565Cf96b72002DD9c372fD`
-- Pancake pair: `0xF4f194eA9Cb6542EeA06561Da1007B0995e36caa`
+- Token `GTAI`: `0x3818c37Eb0FDd29253A0d2AC21c25e51b92587c4`
+- FairMint: `0xda8cdF09C9D3f791bd1DF557D7aD3cB120b67B4e`
 
 ## BSC testnet (contract development only)
 
