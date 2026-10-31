@@ -1,0 +1,4 @@
+interface:
+  display_name: 'GTokenTool AI Rune Mint'
+  short_description: 'Mint GTokenTool AI runes through Binance Agentic Wallet'
+  default_prompt: 'Mint this GTokenTool AI-only rune for me'
